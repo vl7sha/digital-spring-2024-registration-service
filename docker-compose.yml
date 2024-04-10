@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:13.3
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "db_prod" ]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=digitalspring
+      - POSTGRES_USER=digital_admin
+      - POSTGRES_PASSWORD=2024
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      net:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/digitalspring
+      - SPRING_DATASOURCE_USERNAME=digital_admin
+      - SPRING_DATASOURCE_PASSWORD=2024
+#      - JWT_SUBJECT
+#      - JWT_ISSUER
+#      - JWT_SECRET
+#      - JWT_TOKEN_EXPRIES_IN
+#      - BACKEND_URL
+#      - CLIENT_URL
+#      - CONFIRM_TOKEN_URL
+#      - RESTORE_TOKEN_URL
+#      - HOST_MAIL
+#      - PORT_MAIL
+#      - USERNAME_MAIL
+#      - PASSWORD_MAIL
+#      - PROTOCOL_MAIL
+#      - AUTH_MAIL
+#      - CONFIRM_EXPIRED_TIME
+#      - RESTORE_EXPIRED_TIME
+      - SERVER_PORT=8080
+    networks:
+      net:
+
+volumes:
+  postgres:
+    name: digitalspring
+
+networks:
+  net:
+    name: digitalspring
