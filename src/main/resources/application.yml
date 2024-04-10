@@ -15,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  subject: $JWT_SUBJECT:user}
+  subject: ${JWT_SUBJECT:user}
   issuer: ${JWT_ISSUER:course}
   secret: ${JWT_SECRET:J7gzxsdfdsdsfsklill234czxcQgfJ7gQgfczxc}
   tokenExpiresIn: ${JWT_TOKEN_EXPRIES_IN:432000}
