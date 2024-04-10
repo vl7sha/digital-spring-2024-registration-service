@@ -1,4 +1,4 @@
-package ru.pishemzapuskayem.backendbookservice.exception;
+package ru.vl7sha.digitalspring2024registrationservice.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<ApiExceptionDTO> handlerException(ApiException apiException) {
-        return new ResponseEntity<ApiExceptionDTO>(
-                new ApiExceptionDTO(
+    public ResponseEntity<ApiExceptionDTO> handlerException( ApiException apiException) {
+        return new ResponseEntity< ApiExceptionDTO>(
+                new  ApiExceptionDTO(
                         apiException.getMessage(),
                         apiException.getStatus()
                 ),

@@ -29,6 +29,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("com.auth0:java-jwt:4.4.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation ("org.modelmapper:modelmapper:3.1.1")
 
     compileOnly("org.projectlombok:lombok")

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: digital-spring-2024-registration-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/BookService}
+    username: ${SPRING_DATASOURCE_USERNAME:user}
+    password: ${SPRING_DATASOURCE_PASSWORD:1234}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  subject: user
+  issuer: course
+  secret: J7gzxsdfdsdsfsklill234czxcQgfJ7gQgfczxc
+  tokenExpiresIn: 432000
+
+urls:
+  me: ${BACKEND_URL:http://localhost:8080}
+  frontend: ${CLIENT_URL:http://localhost:4200}
+  confirm-token-url: ${CONFIRM_TOKEN_URL:http://localhost:4200/auth/confirm}
+  restore-token-url: ${RESTORE_TOKEN_URL:http://localhost:4200/auth/restore}
+
+mail:
+  host: smtp.mail.ru
+  port: 465
+  username: "vl7shabyandex.ru@mail.ru"
+  password: KdeWxX43ytJsmttdpVua
+  protocol: smtps
+  smtps:
+    auth: true
+
+token:
+  confirm-expired-after: ${CONFIRM_EXPIRED_TIME:30}
+  restore-expired-after: ${RESTORE_EXPIRED_TIME:30}
+
+server:
+  port: ${SERVER_PORT:8080}
