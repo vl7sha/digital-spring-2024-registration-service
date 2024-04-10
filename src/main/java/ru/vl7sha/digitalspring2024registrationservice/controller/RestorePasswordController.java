@@ -14,7 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/account")
 public class RestorePasswordController extends AbstractController {
-    private RestorePasswordService restorePasswordService;
+    private final RestorePasswordService restorePasswordService;
 
     @PostMapping("/request")
     public ResponseEntity requestRestorePassword(

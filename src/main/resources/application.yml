@@ -3,9 +3,9 @@ spring:
     name: digital-spring-2024-registration-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/BookService}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/digitalspring}
     username: ${SPRING_DATASOURCE_USERNAME:user}
-    password: ${SPRING_DATASOURCE_PASSWORD:1234}
+    password: ${SPRING_DATASOURCE_PASSWORD:2024}
 
   jpa:
     hibernate:
@@ -15,10 +15,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  subject: user
-  issuer: course
-  secret: J7gzxsdfdsdsfsklill234czxcQgfJ7gQgfczxc
-  tokenExpiresIn: 432000
+  subject: $JWT_SUBJECT:user}
+  issuer: ${JWT_ISSUER:course}
+  secret: ${JWT_SECRET:J7gzxsdfdsdsfsklill234czxcQgfJ7gQgfczxc}
+  tokenExpiresIn: ${JWT_TOKEN_EXPRIES_IN:432000}
 
 urls:
   me: ${BACKEND_URL:http://localhost:8080}
@@ -27,13 +27,13 @@ urls:
   restore-token-url: ${RESTORE_TOKEN_URL:http://localhost:4200/auth/restore}
 
 mail:
-  host: smtp.mail.ru
-  port: 465
-  username: "vl7shabyandex.ru@mail.ru"
-  password: KdeWxX43ytJsmttdpVua
-  protocol: smtps
+  host: ${HOST_MAIL:smtp.mail.ru}
+  port: ${PORT_MAIL:465}
+  username: ${USERNAME_MAIL:vl7shabyandex.ru@mail.ru}
+  password: ${PASSWORD_MAIL:KdeWxX43ytJsmttdpVua}
+  protocol: ${PROTOCOL_MAIL:smtps}
   smtps:
-    auth: true
+    auth: ${AUTH_MAIL:true}
 
 token:
   confirm-expired-after: ${CONFIRM_EXPIRED_TIME:30}

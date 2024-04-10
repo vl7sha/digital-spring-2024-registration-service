@@ -2,6 +2,7 @@ package ru.vl7sha.digitalspring2024registrationservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailSendException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +22,11 @@ import java.util.Optional;
 @Slf4j
 public class RegistrationService {
 
-    private AccountRepository accountRepository;
-    private TokenService tokenService;
+    private final AccountRepository accountRepository;
+    private final TokenService tokenService;
     private final MailService mailService;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Transactional
     public void singUp(Account account) {
@@ -34,15 +36,16 @@ public class RegistrationService {
             throw new ApiException("Такой email уже есть");
         }
         account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setEnable(false);
+        account.setRole(roleService.findOrCreateByName("ROLE_USER"));
 
-        Account created = accountRepository.save(account);
-
-        Token token = tokenService.createToken(created, TokenType.CONFIRM);
         try {
+            Account created = accountRepository.save(account);
+            Token token = tokenService.createToken(created, TokenType.CONFIRM);
             mailService.sendToken(created.getEmail(), token);
         }
-        catch (Exception e) {
-            log.info("Token таков " + account.getEmail() + " : " + token.getToken());
+        catch (MailSendException e) {
+            throw new ApiException(e.getMessage());
         }
     }
 
@@ -59,7 +62,7 @@ public class RegistrationService {
         if (Objects.equals(confirmToken.getTokenType(), TokenType.CONFIRM)) {
             throw new ApiException("Не тот токен");
         }
-        if (Boolean.TRUE.equals(confirmToken.getIsConfirmed())){
+        if (Boolean.TRUE.equals(confirmToken.getIsConfirmed())) {
             throw new ApiException("Этот токен уже использовали");
         }
 

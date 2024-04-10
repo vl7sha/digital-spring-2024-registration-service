@@ -14,7 +14,9 @@ public class AccountMapper {
     private final ModelMapper modelMapper;
 
     public Account map(RequestRegistrationAccountDTO rradto) {
-        return modelMapper.map(rradto, Account.class);
+        Account account = modelMapper.map(rradto, Account.class);
+        account.setPassword(rradto.getPasswordFirst());
+        return account;
     }
 
     public ResponseAccountDTO map(Account account) {

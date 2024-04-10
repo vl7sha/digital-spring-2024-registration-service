@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import ru.pishemzapuskayem.backendbookservice.security.jwt.JwtFilter;
+import ru.vl7sha.digitalspring2024registrationservice.security.jwt.JwtFilter;
 
 import java.util.List;
 

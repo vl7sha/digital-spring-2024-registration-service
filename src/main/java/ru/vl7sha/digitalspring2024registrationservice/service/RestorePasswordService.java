@@ -1,6 +1,8 @@
 package ru.vl7sha.digitalspring2024registrationservice.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailSendException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.Objects;
 @Transactional
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class RestorePasswordService {
     private final AccountRepository accountRepository;
     private final TokenService tokenService;
@@ -30,9 +33,14 @@ public class RestorePasswordService {
                         () -> new ApiException("Такого аккаунта нет в системе")
                 );
 
-        Token token = tokenService.createToken(account, TokenType.RESTORE);
+        try {
+            Token token = tokenService.createToken(account, TokenType.RESTORE);
+            mailService.sendToken(account.getEmail(), token);
+        }
+        catch (MailSendException e) {
+            throw new ApiException(e.getMessage());
+        }
 
-        mailService.sendToken(account.getEmail(), token);
     }
 
     public void restorePassword(String token, String password) {
