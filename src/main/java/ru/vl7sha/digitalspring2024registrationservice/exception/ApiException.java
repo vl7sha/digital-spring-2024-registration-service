@@ -1,4 +1,5 @@
-package ru.pishemzapuskayem.backendbookservice.exception;
+package ru.vl7sha.digitalspring2024registrationservice.exception;
+
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

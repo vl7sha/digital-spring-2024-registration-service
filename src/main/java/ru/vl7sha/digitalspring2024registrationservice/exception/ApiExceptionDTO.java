@@ -1,4 +1,4 @@
-package ru.pishemzapuskayem.backendbookservice.exception;
+package ru.vl7sha.digitalspring2024registrationservice.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

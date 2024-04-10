@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: digital-spring-2024-registration-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/digitalspring}
+    username: ${SPRING_DATASOURCE_USERNAME:user}
+    password: ${SPRING_DATASOURCE_PASSWORD:2024}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  subject: ${JWT_SUBJECT:user}
+  issuer: ${JWT_ISSUER:course}
+  secret: ${JWT_SECRET:J7gzxsdfdsdsfsklill234czxcQgfJ7gQgfczxc}
+  tokenExpiresIn: ${JWT_TOKEN_EXPRIES_IN:432000}
+
+urls:
+  me: ${BACKEND_URL:http://localhost:8080}
+  frontend: ${CLIENT_URL:http://localhost:4200}
+  confirm-token-url: ${CONFIRM_TOKEN_URL:http://localhost:4200/auth/confirm}
+  restore-token-url: ${RESTORE_TOKEN_URL:http://localhost:4200/auth/restore}
+
+mail:
+  host: ${HOST_MAIL:smtp.mail.ru}
+  port: ${PORT_MAIL:465}
+  username: ${USERNAME_MAIL:vl7shabyandex.ru@mail.ru}
+  password: ${PASSWORD_MAIL:KdeWxX43ytJsmttdpVua}
+  protocol: ${PROTOCOL_MAIL:smtps}
+  smtps:
+    auth: ${AUTH_MAIL:true}
+
+token:
+  confirm-expired-after: ${CONFIRM_EXPIRED_TIME:30}
+  restore-expired-after: ${RESTORE_EXPIRED_TIME:30}
+
+server:
+  port: ${SERVER_PORT:8080}
